@@ -1,4 +1,4 @@
-const generateHTML = require('./src/generateHTML');
+const template = require('./src/template');
 const inquirer = require("inquirer");
 const fs = require('fs'); 
 
@@ -11,22 +11,22 @@ const teamArray = [];
 const managerQuestions = [
     {
         type: 'input',
-        name: "managerName",
+        name: 'name',
         message: "Enter the manager's name: "
     },
     {
         type: 'input',
-        name: "employeeId",
+        name: 'id',
         message: "Enter the manager's employee ID number: "
     },
     {
         type: 'input',
-        name: "emailAddress",
+        name: 'email',
         message: "Enter the manager's email address: "
     },
     {
         type: 'input',
-        name: "officeNumber",
+        name: 'officeNumber',
         message: "Enter the manager's office number: "
     },
 ];
@@ -34,41 +34,111 @@ const managerQuestions = [
 const engineerQuestions = [
     {
         type: 'input',
-        name: "engineerName",
+        name: 'name',
         message: "Enter the engineer's name: "
     },
     {
         type: 'input',
-        name: "id",
+        name: 'id',
         message: "Enter the engineer's employee ID number: "
     },
     {
         type: 'input',
-        name: "email",
+        name: 'email',
         message: "Enter the engineer's email address: "
     },
     {
         type: 'input',
-        name: "gitHub",
+        name: 'gitHub',
         message: "Enter the engineer's GitHub username: "
     },
 ];
 
 const internQuestions = [
     {
-        name: "internName",
+        type: 'input',
+        name: 'name',
         message: "Enter the intern's name: "
     },
     {
-        name: "id",
+        type: 'input',
+        name: 'id',
         message: "Enter the intern's employee ID number: "
     },
     {
-        name: "email",
+        type: 'input',
+        name: 'email',
         message: "Enter the intern's email address: "
     },
     {
-        name: "school",
+        type: 'input',
+        name: 'school',
         message: "Enter the intern's school: "
     },
 ];
+
+function createTeam() {
+    inquirer
+        .prompt([
+            {
+                type: 'list',
+                name: 'addEmployee',
+                massage: 'Select a type of team member to add: ',
+                choices: ['Manager', 'Engineer', 'Intern', 'My team is complete.']
+            }
+        ]).then(function (userInput) {
+            switch(userInput.addEmployee) {
+              case "Manager":
+                addManager();
+                break;
+              case "Engineer":
+                addEngineer();
+                break;
+              case "Intern":
+                addIntern();
+                break;
+      
+              default:
+                buildHTML();
+            }
+        })
+};
+
+function addManager() {
+    inquirer
+        .prompt(managerQuestions)
+        .then((answers) => {
+            const newManager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber)
+            teamArray.push(newManager)
+            createTeam()
+        })
+};
+
+function addEngineer() {
+    inquirer
+        .prompt(engineerQuestions)
+        .then((answers) => {
+            const newEngineer = new Engineer(answers.name, answers.id, answers.email, answers.gitHub)
+            teamArray.push(newEngineer)
+            createTeam()
+        })
+};
+
+function addIntern() {
+    inquirer
+        .prompt(internQuestions)
+        .then((answers) => {
+            const newIntern = new Intern(answers.name, answers.id, answers.email, answers.school)
+            teamArray.push(newIntern)
+            createTeam()
+        })
+};
+
+function buildHTML() {
+   fs.writeFile('./src/template', template(teamArray), (err) => {
+        if(err) console.log(err)
+        else console.log('Successfully created team profiles!')
+   })
+};
+
+createTeam();
