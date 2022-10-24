@@ -1,4 +1,4 @@
-const template = require('./src/template');
+const template = require('./src/template.js');
 const inquirer = require("inquirer");
 const fs = require('fs'); 
 
@@ -26,7 +26,7 @@ const managerQuestions = [
     },
     {
         type: 'input',
-        name: 'officeNumber',
+        name: 'office',
         message: "Enter the manager's office number: "
     },
 ];
@@ -98,8 +98,9 @@ function createTeam() {
                 addIntern();
                 break;
       
-              default:
+              case "My team is complete.":
                 buildHTML();
+                break;
             }
         })
 };
@@ -135,10 +136,10 @@ function addIntern() {
 };
 
 function buildHTML() {
-   fs.writeFile('./src/template', template(teamArray), (err) => {
+    fs.writeFile('./dist/output.html',template(teamArray), (err) => {
         if(err) console.log(err)
-        else console.log('Successfully created team profiles!')
-   })
+        else console.log("successfully wrote html output")
+})
 };
 
 createTeam();

@@ -1,10 +1,11 @@
 const template = (team) => {
-    const team = []
+    console.log(team)
+    const teamHTML = []
 
     const manager = team.filter ((employee) =>employee.getRole() === "Manager").map((manager) => {
            return `
             <div class="card employee-card">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header bg-secondary text-white">
                     <h2 class="card-title">${manager.getName()}</h2>
                     <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>${manager.getRole()}</h3>
                 </div>
@@ -18,13 +19,13 @@ const template = (team) => {
             </div>
            `
     })
-    team.push(manager)
+    teamHTML.push(manager)
 
 
     const engineer = team.filter((employee) => employee.getRole() === "Engineer").map(engineer => {
         return `
         <div class="card employee-card">
-            <div class="card-header bg-primary text-white">
+            <div class="card-header bg-secondary text-white">
                 <h2 class="card-title">${engineer.getName()}</h2>
                 <h3 class="card-title"><i class="fas fa-glasses mr-2"></i>${engineer.getRole()}</h3>
             </div>
@@ -38,12 +39,12 @@ const template = (team) => {
         </div>
         `
     })
-    team.push(engineer)
+    teamHTML.push(engineer)
 
     const intern = team.filter((employee) => employee.getRole() === "Intern").map((intern) => {
         return `
         <div class="card employee-card">
-            <div class="card-header bg-primary text-white">
+            <div class="card-header bg-secondary text-white">
                 <h2 class="card-title">${intern.getName()}</h2>
                 <h3 class="card-title"><i class="fas fa-user-graduate mr-2"></i>${intern.getRole()}</h3>
             </div>
@@ -57,7 +58,7 @@ const template = (team) => {
         </div>
         `
     })
-    team.push(intern)
+    teamHTML.push(intern)
 
 
     return `<!DOCTYPE html>
@@ -75,7 +76,7 @@ const template = (team) => {
     <body>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12 jumbotron mb-3 team-heading bg-danger">
+                <div class="col-12 jumbotron mb-3 team-heading bg-info">
                     <h1 class="text-center text-white">My Team</h1>
                 </div>
             </div>
@@ -83,7 +84,7 @@ const template = (team) => {
         <div class="container">
             <div class="row">
                 <div class="row team-area col-12 d-flex justify-content-center">
-                    ${template(team)}
+                    ${teamHTML}
                 </div>
             </div>
         </div>
