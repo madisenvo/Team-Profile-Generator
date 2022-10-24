@@ -84,13 +84,10 @@ function createTeam() {
                 type: 'list',
                 name: 'addEmployee',
                 massage: 'Select a type of team member to add: ',
-                choices: ['Manager', 'Engineer', 'Intern', 'My team is complete.']
+                choices: ['Engineer', 'Intern', 'My team is complete.']
             }
         ]).then(function (userInput) {
             switch(userInput.addEmployee) {
-              case "Manager":
-                addManager();
-                break;
               case "Engineer":
                 addEngineer();
                 break;
@@ -142,4 +139,4 @@ function buildHTML() {
 })
 };
 
-createTeam();
+addManager();
