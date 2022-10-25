@@ -1,8 +1,10 @@
+/* adds shadow and margin to cards */
 .employee-card{
     margin: 1rem;
     box-shadow: 5px 5px 5px gray;
 }
 
+/* adds background color to card body */
 .card-body {
     background-color: lightgray;
 }

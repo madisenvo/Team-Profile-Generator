@@ -8,6 +8,7 @@ const Intern = require('./lib/Intern');
 
 const teamArray = [];
 
+// gets user input for manager
 const managerQuestions = [
     {
         type: 'input',
@@ -31,6 +32,7 @@ const managerQuestions = [
     },
 ];
 
+// gets user input for engineer
 const engineerQuestions = [
     {
         type: 'input',
@@ -54,6 +56,7 @@ const engineerQuestions = [
     },
 ];
 
+// gets user input for intern
 const internQuestions = [
     {
         type: 'input',
@@ -77,6 +80,7 @@ const internQuestions = [
     },
 ];
 
+// user selects team member to add
 function createTeam() {
     inquirer
         .prompt([
@@ -94,7 +98,6 @@ function createTeam() {
               case "Intern":
                 addIntern();
                 break;
-      
               case "My team is complete.":
                 buildHTML();
                 break;
@@ -102,6 +105,7 @@ function createTeam() {
         })
 };
 
+// promps user with manager-specific questions and adds to team array
 function addManager() {
     inquirer
         .prompt(managerQuestions)
@@ -112,6 +116,7 @@ function addManager() {
         })
 };
 
+// promps user with engineer-specific questions and adds to team array
 function addEngineer() {
     inquirer
         .prompt(engineerQuestions)
@@ -122,6 +127,7 @@ function addEngineer() {
         })
 };
 
+// promps user with intern-specific questions and adds to team array
 function addIntern() {
     inquirer
         .prompt(internQuestions)
@@ -132,6 +138,7 @@ function addIntern() {
         })
 };
 
+// writes file using template
 function buildHTML() {
     fs.writeFile('./dist/output.html',template(teamArray), (err) => {
         if(err) console.log(err)

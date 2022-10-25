@@ -1,7 +1,8 @@
 const template = (team) => {
-    console.log(team)
+// empty array to add team members to
     const teamHTML = []
 
+    // template literal for manager
     const manager = team.filter ((employee) =>employee.getRole() === "Manager").map((manager) => {
            return `
             <div class="card employee-card">
@@ -19,9 +20,11 @@ const template = (team) => {
             </div>
            `
     })
+
+    // adds manager to team array
     teamHTML.push(manager)
 
-
+    // template literal for engineer
     const engineer = team.filter((employee) => employee.getRole() === "Engineer").map(engineer => {
         return `
         <div class="card employee-card">
@@ -39,8 +42,10 @@ const template = (team) => {
         </div>
         `
     })
+    // adds engineer to team array
     teamHTML.push(engineer)
 
+    // template literal for intern
     const intern = team.filter((employee) => employee.getRole() === "Intern").map((intern) => {
         return `
         <div class="card employee-card">
@@ -58,9 +63,10 @@ const template = (team) => {
         </div>
         `
     })
+    // adds intern to team array
     teamHTML.push(intern)
 
-
+// template literal for HTML
     return `<!DOCTYPE html>
     <html lang="en">
     <head>
