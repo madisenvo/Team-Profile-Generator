@@ -15,7 +15,7 @@
   },
   "author": "Madisen Vogel",
   "license": "ISC",
-  "homepage": "https://github.com/nicolewallace09/team-profile-generator#readme",
+  "homepage": "https://github.com/madisenvo/team-profile-generator#readme",
   "devDependencies": {
     "jest": "^24.9.0"
   },
