@@ -1,17 +1,25 @@
 {
-  "name": "static-site",
+  "name": "team-profile-generator",
   "version": "1.0.0",
-  "description": "",
+  "description": "generates team profiles based on user input",
   "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/madisenvo/team-profile-generator.git"
+  },
+  "author": "Madisen Vogel",
   "license": "ISC",
-  "dependencies": {
-    "inquirer": "8.2.4"
-  },
+  "homepage": "https://github.com/nicolewallace09/team-profile-generator#readme",
   "devDependencies": {
-  "jest": "^24.8.0"
+    "jest": "^24.9.0"
+  },
+  "dependencies": {
+    "inquirer": "^8.2.4"
   }
 }
