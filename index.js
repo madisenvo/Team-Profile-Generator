@@ -6,79 +6,7 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
-const teamArray = [];
-
-// gets user input for manager
-const managerQuestions = [
-    {
-        type: 'input',
-        name: 'name',
-        message: "Enter the manager's name: "
-    },
-    {
-        type: 'input',
-        name: 'id',
-        message: "Enter the manager's employee ID number: "
-    },
-    {
-        type: 'input',
-        name: 'email',
-        message: "Enter the manager's email address: "
-    },
-    {
-        type: 'input',
-        name: 'office',
-        message: "Enter the manager's office number: "
-    },
-];
-
-// gets user input for engineer
-const engineerQuestions = [
-    {
-        type: 'input',
-        name: 'name',
-        message: "Enter the engineer's name: "
-    },
-    {
-        type: 'input',
-        name: 'id',
-        message: "Enter the engineer's employee ID number: "
-    },
-    {
-        type: 'input',
-        name: 'email',
-        message: "Enter the engineer's email address: "
-    },
-    {
-        type: 'input',
-        name: 'gitHub',
-        message: "Enter the engineer's GitHub username: "
-    },
-];
-
-// gets user input for intern
-const internQuestions = [
-    {
-        type: 'input',
-        name: 'name',
-        message: "Enter the intern's name: "
-    },
-    {
-        type: 'input',
-        name: 'id',
-        message: "Enter the intern's employee ID number: "
-    },
-    {
-        type: 'input',
-        name: 'email',
-        message: "Enter the intern's email address: "
-    },
-    {
-        type: 'input',
-        name: 'school',
-        message: "Enter the intern's school: "
-    },
-];
+const teamArr = [];
 
 // user selects team member to add
 function createTeam() {
@@ -99,30 +27,39 @@ function createTeam() {
                 addIntern();
                 break;
               case "My team is complete.":
-                buildHTML();
+                generateHTML();
                 break;
             }
-        })
-};
-
-// promps user with manager-specific questions and adds to team array
-function addManager() {
-    inquirer
-        .prompt(managerQuestions)
-        .then((answers) => {
-            const newManager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber)
-            teamArray.push(newManager)
-            createTeam()
         })
 };
 
 // promps user with engineer-specific questions and adds to team array
 function addEngineer() {
     inquirer
-        .prompt(engineerQuestions)
-        .then((answers) => {
+        .prompt([
+                {
+                    type: 'input',
+                    name: 'name',
+                    message: "Enter the engineer's name: "
+                },
+                {
+                    type: 'input',
+                    name: 'id',
+                    message: "Enter the engineer's employee ID number: "
+                },
+                {
+                    type: 'input',
+                    name: 'email',
+                    message: "Enter the engineer's email address: "
+                },
+                {
+                    type: 'input',
+                    name: 'gitHub',
+                    message: "Enter the engineer's GitHub username: "
+                },
+            ]).then((answers) => {
             const newEngineer = new Engineer(answers.name, answers.id, answers.email, answers.gitHub)
-            teamArray.push(newEngineer)
+            teamArr.push(newEngineer)
             createTeam()
         })
 };
@@ -130,17 +67,68 @@ function addEngineer() {
 // promps user with intern-specific questions and adds to team array
 function addIntern() {
     inquirer
-        .prompt(internQuestions)
-        .then((answers) => {
+        .prompt([
+            {
+                type: 'input',
+                name: 'name',
+                message: "Enter the intern's name: "
+            },
+            {
+                type: 'input',
+                name: 'id',
+                message: "Enter the intern's employee ID number: "
+            },
+            {
+                type: 'input',
+                name: 'email',
+                message: "Enter the intern's email address: "
+            },
+            {
+                type: 'input',
+                name: 'school',
+                message: "Enter the intern's school: "
+            },
+        ]).then((answers) => {
             const newIntern = new Intern(answers.name, answers.id, answers.email, answers.school)
-            teamArray.push(newIntern)
+            teamArr.push(newIntern)
+            createTeam()
+        })
+};
+
+// promps user with manager-specific questions and adds to team array
+function addManager() {
+    inquirer
+        .prompt([
+                {
+                    type: 'input',
+                    name: 'name',
+                    message: "Enter the manager's name: "
+                },
+                {
+                    type: 'input',
+                    name: 'id',
+                    message: "Enter the manager's employee ID number: "
+                },
+                {
+                    type: 'input',
+                    name: 'email',
+                    message: "Enter the manager's email address: "
+                },
+                {
+                    type: 'input',
+                    name: 'office',
+                    message: "Enter the manager's office number: "
+                },
+            ]).then((answers) => {
+            const newManager = new Manager(answers.name, answers.id, answers.email, answers.office)
+            teamArr.push(newManager)
             createTeam()
         })
 };
 
 // writes file using template
-function buildHTML() {
-    fs.writeFile('./dist/output.html',template(teamArray), (err) => {
+function generateHTML() {
+    fs.writeFile('./dist/output.html',template(teamArr), (err) => {
         if(err) console.log(err)
         else console.log("successfully wrote html output")
 })
