@@ -8,31 +8,6 @@ const Intern = require('./lib/Intern');
 
 const teamArr = [];
 
-// user selects team member to add
-function createTeam() {
-    inquirer
-        .prompt([
-            {
-                type: 'list',
-                name: 'addEmployee',
-                massage: 'Select a type of team member to add: ',
-                choices: ['Engineer', 'Intern', 'My team is complete.']
-            }
-        ]).then(function (userInput) {
-            switch(userInput.addEmployee) {
-              case "Engineer":
-                addEngineer();
-                break;
-              case "Intern":
-                addIntern();
-                break;
-              case "My team is complete.":
-                generateHTML();
-                break;
-            }
-        })
-};
-
 // promps user with engineer-specific questions and adds to team array
 function addEngineer() {
     inquirer
@@ -123,6 +98,31 @@ function addManager() {
             const newManager = new Manager(answers.name, answers.id, answers.email, answers.office)
             teamArr.push(newManager)
             createTeam()
+        })
+};
+
+// user selects team member to add
+function createTeam() {
+    inquirer
+        .prompt([
+            {
+                type: 'list',
+                name: 'addEmployee',
+                massage: 'Select a type of team member to add: ',
+                choices: ['Engineer', 'Intern', 'My team is complete.']
+            }
+        ]).then((answers) => {
+            switch(answers.addEmployee) {
+              case "Engineer":
+                addEngineer();
+                break;
+              case "Intern":
+                addIntern();
+                break;
+              case "My team is complete.":
+                generateHTML();
+                break;
+            }
         })
 };
 
