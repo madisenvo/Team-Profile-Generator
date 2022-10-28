@@ -130,7 +130,7 @@ function addManager() {
 function generateHTML() {
     fs.writeFile('./dist/output.html',template(teamArr), (err) => {
         if(err) console.log(err)
-        else console.log("successfully wrote html output")
+        else console.log("Successfully generated HTML!")
 })
 };
 
