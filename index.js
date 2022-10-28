@@ -8,6 +8,37 @@ const Intern = require('./lib/Intern');
 
 const teamArr = [];
 
+// promps user with manager-specific questions and adds to team array
+function addManager() {
+    inquirer
+        .prompt([
+                {
+                    type: 'input',
+                    name: 'name',
+                    message: "Enter the manager's name: "
+                },
+                {
+                    type: 'input',
+                    name: 'id',
+                    message: "Enter the manager's employee ID number: "
+                },
+                {
+                    type: 'input',
+                    name: 'email',
+                    message: "Enter the manager's email address: "
+                },
+                {
+                    type: 'input',
+                    name: 'office',
+                    message: "Enter the manager's office number: "
+                },
+            ]).then((answers) => {
+            const newManager = new Manager(answers.name, answers.id, answers.email, answers.office)
+            teamArr.push(newManager)
+            createTeam()
+        })
+};
+
 // promps user with engineer-specific questions and adds to team array
 function addEngineer() {
     inquirer
@@ -66,37 +97,6 @@ function addIntern() {
         ]).then((answers) => {
             const newIntern = new Intern(answers.name, answers.id, answers.email, answers.school)
             teamArr.push(newIntern)
-            createTeam()
-        })
-};
-
-// promps user with manager-specific questions and adds to team array
-function addManager() {
-    inquirer
-        .prompt([
-                {
-                    type: 'input',
-                    name: 'name',
-                    message: "Enter the manager's name: "
-                },
-                {
-                    type: 'input',
-                    name: 'id',
-                    message: "Enter the manager's employee ID number: "
-                },
-                {
-                    type: 'input',
-                    name: 'email',
-                    message: "Enter the manager's email address: "
-                },
-                {
-                    type: 'input',
-                    name: 'office',
-                    message: "Enter the manager's office number: "
-                },
-            ]).then((answers) => {
-            const newManager = new Manager(answers.name, answers.id, answers.email, answers.office)
-            teamArr.push(newManager)
             createTeam()
         })
 };
